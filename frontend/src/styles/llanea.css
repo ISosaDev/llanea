@@ -137,6 +137,21 @@
   height: 100%;
 }
 
+/* Fotografía de fondo: cubre todo el hero y prioriza mostrar el horizonte y el río */
+.hero__foto {
+  object-fit: cover;
+  object-position: 70% 62%;
+}
+
+/* Velo: oscurece la izquierda (donde va el texto) y un poco el borde inferior */
+.hero__velo {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(6, 36, 54, 0.6) 0%, rgba(6, 36, 54, 0.32) 42%, rgba(6, 36, 54, 0) 72%),
+    linear-gradient(180deg, rgba(6, 36, 54, 0.18) 0%, rgba(6, 36, 54, 0) 35%);
+}
+
 .hero__contenido {
   position: relative;
   max-width: var(--contenedor);
@@ -425,6 +440,8 @@
   .cuadricula { grid-template-columns: 1fr; }
   /* En celular el buscador va debajo del texto, dentro del hero */
   .hero { padding-bottom: 28px; }
+  /* El texto ocupa todo el ancho, así que el velo se reparte parejo */
+  .hero__velo { background: linear-gradient(180deg, rgba(6, 36, 54, 0.55) 0%, rgba(6, 36, 54, 0.35) 100%); }
   .buscador {
     position: relative;
     left: auto;
