@@ -1,0 +1,442 @@
+/*
+ * Estilos de la Home de Llanea.
+ * Autor: Isael Antonio Sosa (ISosaDev) | Proyecto Llanea | Ficha 3336142
+ * Los colores y medidas vienen de las variables definidas en index.css.
+ */
+
+/* ---------- Encabezado ---------- */
+.encabezado {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 24px;
+  background: var(--color-encabezado);
+  border-bottom: 1px solid var(--color-borde);
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-self: start;
+}
+
+.marca__logo {
+  width: 40px;
+  height: 36px;
+  padding: 4px;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 9px;
+  box-shadow: 0 1px 6px rgba(15, 42, 61, 0.15);
+}
+
+.marca__texto {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.marca__texto strong {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.marca__texto small {
+  font-size: 11px;
+  color: var(--color-texto-suave);
+}
+
+.navegacion {
+  display: flex;
+  gap: 32px;
+}
+
+.navegacion__enlace {
+  padding: 6px 0;
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+}
+
+.navegacion__enlace:hover {
+  color: var(--color-primario);
+}
+
+.navegacion__enlace--activo {
+  color: var(--color-primario);
+  border-bottom-color: var(--color-primario);
+}
+
+.acciones {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-self: end;
+}
+
+.acciones__boton {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+}
+
+.acciones__boton:hover {
+  background: rgba(15, 92, 120, 0.1);
+}
+
+.acciones__contador {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 16px;
+  text-align: center;
+  color: #fff;
+  background: var(--color-primario);
+  border-radius: 999px;
+}
+
+.acciones__avatar {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--color-primario);
+  border-radius: 50%;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  min-height: 330px;
+  padding: 48px 24px 90px;
+  color: #fff;
+  background: #2f7ea4;
+}
+
+.hero__fondo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero__contenido {
+  position: relative;
+  max-width: var(--contenedor);
+  margin: 0 auto;
+  padding: 0 24px; /* alinea el texto del hero con los filtros y las tarjetas */
+}
+
+.hero__etiqueta {
+  display: inline-block;
+  padding: 6px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+}
+
+.hero h1 {
+  max-width: 620px;
+  margin: 14px 0 12px;
+  font-size: clamp(34px, 5vw, 54px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.hero p {
+  max-width: 560px;
+  font-size: 17px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* El buscador queda a caballo entre el hero y el contenido */
+.buscador {
+  position: absolute;
+  left: 50%;
+  bottom: -34px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: max-content;
+  max-width: calc(100% - 32px);
+  padding: 10px 12px;
+  color: var(--color-texto);
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(8, 40, 60, 0.22);
+}
+
+.buscador__campo {
+  display: flex;
+  flex-direction: column;
+  padding: 0 14px;
+  border-right: 1px solid var(--color-borde);
+}
+
+.buscador__campo label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-texto-suave);
+}
+
+.buscador__campo select {
+  padding: 2px 0;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-texto);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.buscador__boton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 22px;
+  font-weight: 700;
+  color: var(--color-texto);
+  background: var(--color-acento);
+  border: 0;
+  border-radius: 10px;
+}
+
+.buscador__boton:hover {
+  background: var(--color-acento-oscuro);
+}
+
+/* ---------- Catálogo ---------- */
+.catalogo {
+  max-width: var(--contenedor);
+  margin: 0 auto;
+  padding: 76px 24px 56px;
+}
+
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.filtro {
+  padding: 9px 18px;
+  font-size: 15px;
+  font-weight: 500;
+  background: #fff;
+  border: 1px solid var(--color-borde);
+  border-radius: 999px;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.filtro:hover {
+  border-color: var(--color-primario);
+}
+
+.filtro--activo {
+  font-weight: 700;
+  background: var(--color-acento);
+  border-color: var(--color-acento);
+}
+
+.catalogo__vacio {
+  padding: 48px 16px;
+  text-align: center;
+  color: var(--color-texto-suave);
+  background: #fff;
+  border: 1px dashed var(--color-borde);
+  border-radius: var(--radio-tarjeta);
+}
+
+/* ---------- Secciones ---------- */
+.seccion {
+  margin-bottom: 40px;
+}
+
+.seccion__cabecera {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.seccion h2 {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.seccion__subtitulo {
+  margin-top: 2px;
+  font-size: 14px;
+  color: var(--color-texto-suave);
+}
+
+.seccion__ver-todo {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-primario);
+}
+
+.seccion__ver-todo:hover {
+  text-decoration: underline;
+}
+
+.cuadricula {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* ---------- Tarjeta ---------- */
+.tarjeta {
+  overflow: hidden;
+  background: var(--color-superficie);
+  border-radius: var(--radio-tarjeta);
+  box-shadow: var(--sombra-tarjeta);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.tarjeta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(15, 42, 61, 0.14);
+}
+
+.tarjeta__imagen {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #f6c27a;
+}
+
+.tarjeta__imagen img,
+.tarjeta__ilustracion {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tarjeta__insignias {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  gap: 6px;
+}
+
+.insignia {
+  padding: 4px 9px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  border-radius: 999px;
+}
+
+.insignia--verificado { color: #fff; background: var(--color-primario); }
+.insignia--amarillo { color: var(--color-texto); background: var(--color-acento); }
+.insignia--naranja { color: #fff; background: var(--color-naranja); }
+
+.tarjeta__favorito {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  color: var(--color-texto);
+  background: rgba(255, 255, 255, 0.92);
+  border: 0;
+  border-radius: 50%;
+}
+
+.tarjeta__favorito--activo {
+  color: #d8344a;
+}
+
+.tarjeta__cuerpo {
+  padding: 12px 14px 14px;
+}
+
+.tarjeta__nombre {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.tarjeta__municipio,
+.tarjeta__calificacion {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--color-texto-suave);
+}
+
+.tarjeta__pin { display: inline-flex; color: #d8503a; }
+.tarjeta__estrella { display: inline-flex; color: #f2b01e; }
+.tarjeta__calificacion strong { color: var(--color-texto); }
+
+.tarjeta__precio {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--color-texto-suave);
+}
+
+.tarjeta__precio strong {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--color-texto);
+}
+
+/* ---------- Pantallas pequeñas ---------- */
+@media (max-width: 1000px) {
+  .cuadricula { grid-template-columns: repeat(2, 1fr); }
+  .navegacion { display: none; }
+  .encabezado { grid-template-columns: 1fr auto; }
+}
+
+@media (max-width: 640px) {
+  .cuadricula { grid-template-columns: 1fr; }
+  /* En celular el buscador va debajo del texto, dentro del hero */
+  .hero { padding-bottom: 28px; }
+  .buscador {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: none;
+    margin-top: 24px;
+  }
+  .buscador__campo { padding: 6px 0; border-right: 0; border-bottom: 1px solid var(--color-borde); }
+  .catalogo { padding-top: 32px; }
+  .marca__texto small { display: none; }
+}
