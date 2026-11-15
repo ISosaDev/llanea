@@ -6,7 +6,8 @@ import { useState } from 'react';
 import { FondoHero } from './Ilustraciones';
 import BuscadorRapido from './BuscadorRapido';
 
-function Hero() {
+// Recibe el filtro compartido y se lo pasa al buscador
+function Hero(props) {
   // Estado: si la fotografía no carga, se dibuja el paisaje vectorial de respaldo
   const [fallaImagen, setFallaImagen] = useState(false);
 
@@ -37,7 +38,7 @@ function Hero() {
           Todo reservable en línea.
         </p>
       </div>
-      <BuscadorRapido />
+      <BuscadorRapido {...props} />
     </section>
   );
 }

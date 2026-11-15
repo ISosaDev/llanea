@@ -1,30 +1,60 @@
 /**
  * Barra de búsqueda rápida del hero: municipio, tipo y fechas.
  * Autor: Isael Antonio Sosa (ISosaDev) | Proyecto Llanea
- * Es solo interfaz: la búsqueda real se conecta cuando exista la API del backend.
+ * Municipio y Tipo son selectores controlados: leen y cambian el filtro que vive en App.
+ * Fechas queda deshabilitado hasta que exista el módulo de reservas.
  */
+import { categorias, establecimientos } from '../data/establecimientos';
 import Icono from './Icono';
 
-// Cada campo: etiqueta visible, nombre accesible y opciones del selector
-const CAMPOS = [
-  { id: 'municipio', etiqueta: 'Municipio', opciones: ['Yopal', 'Aguazul', 'Paz de Ariporo', 'Villanueva', 'Tauramena', 'Orocué'] },
-  { id: 'tipo', etiqueta: 'Tipo', opciones: ['Alojamiento', 'Gastronomía', 'Ecoturismo'] },
-  { id: 'fechas', etiqueta: 'Fechas', opciones: ['Esta semana', 'Este fin de semana', 'Próximo mes'] },
-];
+// Municipios que realmente tienen establecimientos, sin repetir y en orden alfabético
+const MUNICIPIOS = [...new Set(establecimientos.map((e) => e.municipio))].sort();
 
-function BuscadorRapido() {
+function BuscadorRapido({ categoriaActiva, onSeleccionarCategoria, municipioActivo, onSeleccionarMunicipio }) {
+  // Buscar aplica de inmediato (el filtro ya cambió al elegir) y baja al catálogo
+  const buscar = (evento) => {
+    evento.preventDefault();
+    document.getElementById('catalogo')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <form className="buscador" onSubmit={(evento) => evento.preventDefault()} role="search">
-      {CAMPOS.map((campo) => (
-        <div key={campo.id} className="buscador__campo">
-          <label htmlFor={`buscador-${campo.id}`}>{campo.etiqueta}</label>
-          <select id={`buscador-${campo.id}`} defaultValue={campo.opciones[0]}>
-            {campo.opciones.map((opcion) => (
-              <option key={opcion}>{opcion}</option>
-            ))}
-          </select>
-        </div>
-      ))}
+    <form id="buscador" className="buscador" onSubmit={buscar} role="search">
+      <div className="buscador__campo">
+        <label htmlFor="buscador-municipio">Municipio</label>
+        <select
+          id="buscador-municipio"
+          value={municipioActivo}
+          onChange={(evento) => onSeleccionarMunicipio(evento.target.value)}
+        >
+          <option value="Todos">Todos los municipios</option>
+          {MUNICIPIOS.map((municipio) => (
+            <option key={municipio} value={municipio}>{municipio}</option>
+          ))}
+        </select>
+      </div>
+
+      <div className="buscador__campo">
+        <label htmlFor="buscador-tipo">Tipo</label>
+        <select
+          id="buscador-tipo"
+          value={categoriaActiva}
+          onChange={(evento) => onSeleccionarCategoria(evento.target.value)}
+        >
+          {categorias.map((categoria) => (
+            <option key={categoria} value={categoria}>
+              {categoria === 'Todos' ? 'Todos los tipos' : categoria}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="buscador__campo">
+        <label htmlFor="buscador-fechas">Fechas</label>
+        <select id="buscador-fechas" disabled title="Disponible cuando se active el módulo de reservas">
+          <option>Próximamente</option>
+        </select>
+      </div>
+
       <button type="submit" className="buscador__boton">
         <Icono nombre="buscar" tamano={16} /> Buscar
       </button>

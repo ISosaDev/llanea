@@ -2,16 +2,13 @@
  * Encabezado de la Home: marca, navegación principal y acciones del usuario.
  * Autor: Isael Antonio Sosa (ISosaDev) | Proyecto Llanea
  */
-import { useState } from 'react';
 import Icono from './Icono';
 
-// Enlaces de la navegación principal
-const ENLACES = ['Alojamiento', 'Gastronomía', 'Ecoturismo', 'Municipios'];
+// Categorías del menú: usan el mismo filtro que los chips del catálogo
+const CATEGORIAS_MENU = ['Alojamiento', 'Gastronomía', 'Ecoturismo'];
 
-function Encabezado() {
-  // Estado: enlace de navegación activo (el subrayado sigue a este valor)
-  const [activo, setActivo] = useState('Alojamiento');
-
+// categoriaActiva y onSeleccionarCategoria llegan por props desde App (estado compartido)
+function Encabezado({ categoriaActiva, onSeleccionarCategoria }) {
   return (
     <header className="encabezado">
       <a className="marca" href="/" aria-label="Llanea, inicio">
@@ -23,20 +20,20 @@ function Encabezado() {
       </a>
 
       <nav className="navegacion" aria-label="Secciones principales">
-        {ENLACES.map((enlace) => (
+        {CATEGORIAS_MENU.map((categoria) => (
+          // El enlace aplica el filtro y baja al catálogo con el ancla #catalogo
           <a
-            key={enlace}
-            href="#"
-            className={enlace === activo ? 'navegacion__enlace navegacion__enlace--activo' : 'navegacion__enlace'}
-            aria-current={enlace === activo ? 'page' : undefined}
-            onClick={(evento) => {
-              evento.preventDefault(); // evita que el enlace recargue la página
-              setActivo(enlace);
-            }}
+            key={categoria}
+            href="#catalogo"
+            className={categoria === categoriaActiva ? 'navegacion__enlace navegacion__enlace--activo' : 'navegacion__enlace'}
+            aria-current={categoria === categoriaActiva ? 'page' : undefined}
+            onClick={() => onSeleccionarCategoria(categoria)}
           >
-            {enlace}
+            {categoria}
           </a>
         ))}
+        {/* Municipios lleva al buscador, donde está el selector de municipio */}
+        <a href="#buscador" className="navegacion__enlace">Municipios</a>
       </nav>
 
       <div className="acciones">

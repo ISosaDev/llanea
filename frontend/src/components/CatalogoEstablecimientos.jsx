@@ -1,32 +1,29 @@
 /**
- * Catálogo de establecimientos de la Home de Llanea con filtro por categoría.
+ * Catálogo de establecimientos de la Home de Llanea con filtros por categoría y municipio.
  * Autor: Isael Antonio Sosa (ISosaDev) | Proyecto Llanea | Ficha 3336142
  *
- * Es el componente principal de la evidencia: guarda el estado del filtro con
- * useState y reparte los datos a los componentes hijos por props.
+ * Es el componente principal de la evidencia: recibe el filtro por props (el estado vive en
+ * App y lo comparten el menú, el buscador y los chips), calcula qué tarjetas mostrar y
+ * reparte los datos a los componentes hijos.
  */
-import { useState } from 'react';
 import { categorias, secciones, establecimientos } from '../data/establecimientos';
 import FiltrosCategoria from './FiltrosCategoria';
 import SeccionEstablecimientos from './SeccionEstablecimientos';
 
-function CatalogoEstablecimientos() {
-  // Hook de estado: categoriaActiva guarda la selección y setCategoriaActiva la cambia.
-  // Cuando cambia el estado, React vuelve a ejecutar este componente y actualiza solo lo que cambió.
-  const [categoriaActiva, setCategoriaActiva] = useState('Todos');
-
-  // Lista visible: se calcula a partir del estado, no se guarda aparte
-  const visibles =
-    categoriaActiva === 'Todos'
-      ? establecimientos
-      : establecimientos.filter((e) => e.categoria === categoriaActiva);
+function CatalogoEstablecimientos({ categoriaActiva, onSeleccionarCategoria, municipioActivo, onLimpiar }) {
+  // Lista visible: se calcula a partir de las props, no se guarda aparte
+  const visibles = establecimientos.filter(
+    (e) =>
+      (categoriaActiva === 'Todos' || e.categoria === categoriaActiva) &&
+      (municipioActivo === 'Todos' || e.municipio === municipioActivo),
+  );
 
   return (
-    <main className="catalogo">
+    <main id="catalogo" className="catalogo">
       <FiltrosCategoria
         categorias={categorias}
         categoriaActiva={categoriaActiva}
-        onSeleccionar={setCategoriaActiva}
+        onSeleccionar={onSeleccionarCategoria}
       />
 
       {/* Las secciones sin resultados no se dibujan */}
@@ -36,11 +33,17 @@ function CatalogoEstablecimientos() {
         return <SeccionEstablecimientos key={seccion.id} seccion={seccion} items={items} />;
       })}
 
-      {/* Estado vacío: ninguna tarjeta coincide con el filtro */}
+      {/* Estado vacío: ninguna tarjeta coincide con los filtros */}
       {visibles.length === 0 && (
-        <p className="catalogo__vacio" role="status">
-          Aún no hay establecimientos en «{categoriaActiva}». Pronto sumaremos más del Casanare.
-        </p>
+        <div className="catalogo__vacio" role="status">
+          <p>
+            No hay establecimientos de «{categoriaActiva === 'Todos' ? 'todas las categorías' : categoriaActiva}»
+            {municipioActivo === 'Todos' ? '' : ` en ${municipioActivo}`}. Pronto sumaremos más del Casanare.
+          </p>
+          <button type="button" className="catalogo__limpiar" onClick={onLimpiar}>
+            Ver todo el catálogo
+          </button>
+        </div>
       )}
     </main>
   );

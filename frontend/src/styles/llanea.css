@@ -457,3 +457,25 @@
   .catalogo { padding-top: 32px; }
   .marca__texto small { display: none; }
 }
+
+
+/* Ancla suave: el menú y el botón Buscar bajan al catálogo sin salto brusco */
+html { scroll-behavior: smooth; }
+.catalogo { scroll-margin-top: 72px; }
+#buscador { scroll-margin-top: 90px; }
+
+/* Selector de fechas deshabilitado hasta tener módulo de reservas */
+.buscador__campo select:disabled { opacity: 0.55; cursor: not-allowed; }
+
+/* Botón del estado vacío */
+.catalogo__limpiar {
+  margin-top: 12px;
+  padding: 10px 20px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--color-acento);
+  color: #1a1a1a;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
